@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: James Martin
+  author: James Martin <jmartin@basho.com>
   description: this role is a dependency of the basho.riak, basho.riakcs, basho.stanchion, basho.riakcs-packages roles.  It sets up package repositories and preps PAM for some ulimit tunings.
   company: Basho
   license: Apache
