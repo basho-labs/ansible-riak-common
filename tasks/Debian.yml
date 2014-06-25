@@ -8,9 +8,6 @@
 - name: update cache
   apt: update_cache=yes cache_valid_time=3600
 
-- name: disable ufw
-  service: name=ufw state=stopped enabled=no
-
 - name: update pam configuration
   lineinfile: line="session    required   pam_limits.so" dest={{ item }} regexp="session    required   pam_limits.so" insertafter="^# end of pam-auth-update config"
   with_items:

@@ -6,3 +6,7 @@
 # Ubuntu specific package installations
 - include: Debian.yml
   when: ansible_os_family  == "Debian"
+
+# Ubuntu specific package installations
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
