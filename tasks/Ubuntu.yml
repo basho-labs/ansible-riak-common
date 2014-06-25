@@ -1,0 +1,4 @@
+---
+- name: disable ufw
+  service: name=ufw state=stopped enabled=no
+
