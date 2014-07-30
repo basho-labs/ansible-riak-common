@@ -5,7 +5,13 @@
 - name: configure the epel repository
   yum: name=/tmp/epel-release-6-8.noarch.rpm
 
-- name: configure the basho repository
+- name: fetch the basho 2.x repo install script from packagecloud
+  get_url: url=https://packagecloud.io/install/repositories/basho/riak/script.rpm dest=/tmp/basho-repo.sh
+
+- name: install the basho 2.x repo
+  shell: /bin/bash /tmp/basho-repo.sh
+
+- name: configure the basho 1.x repository
   yum: name=http://yum.basho.com/gpg/basho-release-6-1.noarch.rpm
 
 - name: install libselinux-python

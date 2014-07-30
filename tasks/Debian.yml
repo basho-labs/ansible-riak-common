@@ -1,12 +1,21 @@
 ---
-- name: get the basho apt key
+- name: get the 1.x basho repo apt key
   apt_key: url=http://apt.basho.com/gpg/basho.apt.key state=present
 
-- name: configure the basho repository
+- name: configure the 1.x basho repository
   template: src=etc_apt_sources.list.d_basho.list.j2 dest=/etc/apt/sources.list.d/basho.list
 
-- name: update cache
-  apt: update_cache=yes cache_valid_time=3600
+- name: install curl
+  apt: name=curl state=present update_cache=yes
+
+- name: fetch 2.x repo script from packagecloud.io
+  get_url: url=https://packagecloud.io/install/repositories/basho/riak/script.deb dest=/tmp/basho-repo.sh
+
+# The packagecloud.io script performs an update of all repos -- causing the 1.x and 2.x repo
+# metadata to be updated.  While an odd side-effect, attempting to update twice creates a race
+# condition with apt caching optimism ...
+- name: exec 2.x repo installation script
+  shell: /bin/bash /tmp/basho-repo.sh
 
 - name: update pam configuration
   lineinfile: line="session    required   pam_limits.so" dest={{ item }} regexp="session    required   pam_limits.so" insertafter="^# end of pam-auth-update config"
