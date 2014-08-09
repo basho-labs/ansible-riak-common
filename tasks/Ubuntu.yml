@@ -1,4 +1,5 @@
 ---
 - name: disable ufw
   service: name=ufw state=stopped enabled=no
-
+  register: ufw_result
+  failed_when: "ufw_result|failed and 'not found' not in ufw_result.msg"
