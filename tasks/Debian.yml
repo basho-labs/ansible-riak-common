@@ -6,16 +6,21 @@
   template: src=etc_apt_sources.list.d_basho.list.j2 dest=/etc/apt/sources.list.d/basho.list
 
 - name: install curl
-  apt: name=curl state=present update_cache=yes
+  apt: name=curl state=present update_cache=yes cache_valid_time=86400
+
+- stat: path=/etc/apt/sources.list.d/basho_riak.list
+  register: st_basho_riak_list
 
 - name: fetch 2.x repo script from packagecloud.io
   get_url: url=https://packagecloud.io/install/repositories/basho/riak/script.deb dest=/tmp/basho-repo.sh
+  when: not st_basho_riak_list.stat.exists
 
 # The packagecloud.io script performs an update of all repos -- causing the 1.x and 2.x repo
 # metadata to be updated.  While an odd side-effect, attempting to update twice creates a race
 # condition with apt caching optimism ...
 - name: exec 2.x repo installation script
   shell: /bin/bash /tmp/basho-repo.sh
+  when: not st_basho_riak_list.stat.exists
 
 - name: update pam configuration
   lineinfile: line="session    required   pam_limits.so" dest={{ item }} regexp="session    required   pam_limits.so" insertafter="^# end of pam-auth-update config"
