@@ -28,5 +28,7 @@ Apache
 Maintainer Information
 ------------------
 
-bhunt@basho.com
+- James Martin 
+- Bryan Hunt (<bhunt@basho.com>)
+- Hector Castro
 
