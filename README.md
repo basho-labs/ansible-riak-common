@@ -25,7 +25,8 @@ License
 
 Apache
 
-Author Information
+Maintainer Information
 ------------------
 
-jmartin@baso.com
+bhunt@basho.com
+
