@@ -2,9 +2,6 @@
 - name: get the 1.x basho repo apt key
   apt_key: url=http://apt.basho.com/gpg/basho.apt.key state=present
 
-- name: configure the 1.x basho repository
-  template: src=etc_apt_sources.list.d_basho.list.j2 dest=/etc/apt/sources.list.d/basho.list
-
 - name: install curl
   apt: name=curl state=present update_cache=yes cache_valid_time=86400
 
