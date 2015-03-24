@@ -28,7 +28,6 @@ Apache
 Maintainer Information
 ------------------
 
-- James Martin 
 - Bryan Hunt (<bhunt@basho.com>)
-- Hector Castro
+- and You! [Read up](https://github.com/basho-labs/the-riak-community/blob/master/config-mgmt-strategy.md) and get involved
 
