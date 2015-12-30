@@ -1,9 +1,6 @@
 ---
-- name: fetch yum repository
-  get_url: url=http://mirror.pnl.gov/epel/6/i386/epel-release-6-8.noarch.rpm dest=/tmp
-
-- name: configure the epel repository
-  yum: name=/tmp/epel-release-6-8.noarch.rpm
+- name: Install yum repository
+  yum: name=epel-release.noarch state=present
 
 - name: fetch the basho 2.x repo install script from packagecloud
   get_url: url=https://packagecloud.io/install/repositories/basho/riak/script.rpm dest=/tmp/basho-repo.sh
